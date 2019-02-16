@@ -39,89 +39,152 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void displayMain(String number){
+        TextView mainNumber = (TextView) findViewById(R.id.main_num);
+        mainNumber.setText("mainDisplay: " + number);
+    }
+
+    private void displayRun(String number){
+        TextView mainNumber = (TextView) findViewById(R.id.run_sum);
+        mainNumber.setText("runSum: " + number);
+    }
+
     public void clickOne(View view){
         mainDisplayNumber += "1";
+        runningSum += "1";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     public void clickTwo(View view){
         mainDisplayNumber += "2";
+        runningSum += "2";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickThree(View view){
         mainDisplayNumber += "3";
+        runningSum += "3";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickFour(View view){
         mainDisplayNumber += "4";
+        runningSum += "4";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickFive(View view){
         mainDisplayNumber += "5";
+        runningSum += "5";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickSix(View view){
         mainDisplayNumber += "6";
+        runningSum += "6";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickSeven(View view){
         mainDisplayNumber += "7";
+        runningSum += "7";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
     public void clickEight(View view){
         mainDisplayNumber += "8";
+        runningSum += "8";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     public void clickNine(View view) {
         mainDisplayNumber += "9";
         runningSum += "9";
+        displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     public void clickZero(View view){
         mainDisplayNumber += "0";
         runningSum += "0";
         displayNumber(mainDisplayNumber);
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     public void clickClear(View view){
         mainDisplayNumber = "";
         runningSum = "";
         displayNumber("0");
+        runSum = false;
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
 
-
     public void clickDel(View view){
-        if(mainDisplayNumber.length() == 1){
-            mainDisplayNumber = "";
-            displayNumber("0");
+        if (!runSum) {
+            try {
+                if (mainDisplayNumber.length() == 1) {
+                    mainDisplayNumber = "";
+                    displayNumber("0");
+                } else {
+                    mainDisplayNumber = mainDisplayNumber.substring(0, mainDisplayNumber.length() - 1);
+                    displayNumber(mainDisplayNumber);
+                }
+            } catch (Exception e) {
+                displayNumber("0");
+            }
+            runningSum = mainDisplayNumber;
         }
-        else {
-            mainDisplayNumber = mainDisplayNumber.substring(0, mainDisplayNumber.length() - 1);
-            displayNumber(mainDisplayNumber);
-        }
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     //Coding a Full-Calculator
 
     public void clickAdd(View view){
-        runningSum = mainDisplayNumber + "+";
+        if(runningSum.endsWith("+")){
+            runningSum = runningSum.substring(0, runningSum.length() - 1);
+        }
+        if(mainDisplayNumber.equals("") && runningSum.length() == 0){
+            runningSum = 0 + "+";
+        }
+        else {
+            runningSum = runningSum + "+";
+        }
         mainDisplayNumber = "";
-//        String number = "9+9";
-//        int sum = (int) eval(number);
-//        String value = String.valueOf(sum);
-//        displayNumber(value);
+        runSum = true;
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
     public void clickEquals(View view){
-        int quantity = (int) eval(runningSum);
-        String quantValue = Integer.toString(quantity);
-        displayNumber(quantValue);
+//        displayNumber(runningSum);
+        mainDisplayNumber = "";
+        try {
+            int quantity = (int) eval(runningSum);
+            String quantValue = Integer.toString(quantity);
+            displayNumber(quantValue);
+        } catch(Exception e){
+            displayNumber("Not Working");
+        }
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
     }
 
-
-
+//Parser: Credits to StackOverflow User
     public static double eval(final String str) {
         return new Object() {
             int pos = -1, ch;
@@ -201,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }.parse();
     }
-
 
 
 }
