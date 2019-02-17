@@ -12,6 +12,23 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/run_sum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/main_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
+
+
+    <TextView
         android:id="@+id/main_number"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -115,7 +132,7 @@
             android:layout_margin="6dp"
             android:layout_weight="1"
             android:background="@drawable/circleorange"
-            android:onClick="clickSix"
+            android:onClick="clickMinus"
             android:text="-"
             android:textColor="@color/white"
             android:textSize="32sp" />
@@ -166,7 +183,7 @@
             android:layout_margin="6dp"
             android:layout_weight="1"
             android:background="@drawable/circleorange"
-            android:onClick="clickSix"
+            android:onClick="clickMultiply"
             android:text="x"
             android:textColor="@color/white"
             android:textSize="32sp" />
@@ -217,7 +234,7 @@
             android:layout_margin="6dp"
             android:layout_weight="1"
             android:background="@drawable/circleorange"
-            android:onClick="clickSix"
+            android:onClick="clickEquals"
             android:text="="
             android:textColor="@color/white"
             android:textSize="32sp" />

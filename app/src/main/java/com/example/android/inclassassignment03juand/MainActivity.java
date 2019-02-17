@@ -155,14 +155,55 @@ public class MainActivity extends AppCompatActivity {
     //Coding a Full-Calculator
 
     public void clickAdd(View view){
-        if(runningSum.endsWith("+")){
+        if(runningSum.endsWith("+") || runningSum.endsWith("-") || runningSum.endsWith("*")){
             runningSum = runningSum.substring(0, runningSum.length() - 1);
         }
         if(mainDisplayNumber.equals("") && runningSum.length() == 0){
             runningSum = 0 + "+";
         }
         else {
+            int quantity = (int) eval(runningSum);
+            String quantValue = Integer.toString(quantity);
+            displayNumber(quantValue);
             runningSum = runningSum + "+";
+        }
+        mainDisplayNumber = "";
+        runSum = true;
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
+    }
+
+    public void clickMinus(View view){
+        if(runningSum.endsWith("-") || runningSum.endsWith("+") || runningSum.endsWith("*")){
+            runningSum = runningSum.substring(0, runningSum.length() - 1);
+        }
+        if(mainDisplayNumber.equals("") && runningSum.length() == 0){
+            runningSum = 0 + "-";
+        }
+        else {
+            int quantity = (int) eval(runningSum);
+            String quantValue = Integer.toString(quantity);
+            displayNumber(quantValue);
+            runningSum = runningSum + "-";
+        }
+        mainDisplayNumber = "";
+        runSum = true;
+        displayMain(mainDisplayNumber);
+        displayRun(runningSum);
+    }
+
+    public void clickMultiply(View view){
+        if(runningSum.endsWith("-") || runningSum.endsWith("+") || runningSum.endsWith("*")){
+            runningSum = runningSum.substring(0, runningSum.length() - 1);
+        }
+        if(mainDisplayNumber.equals("") && runningSum.length() == 0){
+            runningSum = 0 + "*";
+        }
+        else {
+            int quantity = (int) eval(runningSum);
+            String quantValue = Integer.toString(quantity);
+            displayNumber(quantValue);
+            runningSum = runningSum + "*";
         }
         mainDisplayNumber = "";
         runSum = true;
@@ -174,6 +215,9 @@ public class MainActivity extends AppCompatActivity {
 //        displayNumber(runningSum);
         mainDisplayNumber = "";
         try {
+            if(runningSum.endsWith("+")){
+                runningSum = runningSum.substring(0, runningSum.length() - 1);
+            }
             int quantity = (int) eval(runningSum);
             String quantValue = Integer.toString(quantity);
             displayNumber(quantValue);
