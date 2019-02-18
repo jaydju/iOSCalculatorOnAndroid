@@ -11,12 +11,14 @@ public class MainActivity extends AppCompatActivity {
     String mainDisplayNumber = "";
     String runningSum = "";
     boolean runSum;
+    boolean showEquals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         runSum = false;
+        showEquals = false;
     }
 
     private void mainDisplayLimiter(){
@@ -128,26 +130,33 @@ public class MainActivity extends AppCompatActivity {
         runningSum = "";
         displayNumber("0");
         runSum = false;
+        showEquals = false;
         displayMain(mainDisplayNumber);
         displayRun(runningSum);
     }
 
 
     public void clickDel(View view){
-        if (!runSum) {
+        if (!showEquals){
             try {
-                if (mainDisplayNumber.length() == 1) {
+                //If the Number in the Main Display is Only Length 1, Deleting it Will Set it to Zero
+                if (mainDisplayNumber.length() == 1 && runningSum.length() == 1) {
                     mainDisplayNumber = "";
+                    runningSum = "";
                     displayNumber("0");
-                } else {
+                }
+                //Method Deletes the Last Number of the Main Display.'
+                else {
                     mainDisplayNumber = mainDisplayNumber.substring(0, mainDisplayNumber.length() - 1);
+                    if (runningSum.endsWith("+") || runningSum.endsWith("*") || runningSum.endsWith("-") ){displayNumber("0");}
+                    else {runningSum = runningSum.substring(0, runningSum.length() - 1);}
                     displayNumber(mainDisplayNumber);
                 }
             } catch (Exception e) {
                 displayNumber("0");
             }
-            runningSum = mainDisplayNumber;
-        }
+//            runningSum = mainDisplayNumber;
+    }
         displayMain(mainDisplayNumber);
         displayRun(runningSum);
     }
@@ -212,7 +221,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickEquals(View view){
-//        displayNumber(runningSum);
         mainDisplayNumber = "";
         try {
             if(runningSum.endsWith("+")){
@@ -224,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
         } catch(Exception e){
             displayNumber("Not Working");
         }
+        showEquals = true;
         displayMain(mainDisplayNumber);
         displayRun(runningSum);
     }
