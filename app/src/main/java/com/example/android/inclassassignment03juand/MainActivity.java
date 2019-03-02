@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     displayNumber("0");
                 }
                 //Method Deletes the Last Number of the Main Display.'
+                else if(mainDisplayNumber.length() == 0 && (runningSum.endsWith("+")  || runningSum.endsWith("*") || runningSum.endsWith("-"))){}
                 else {
                     mainDisplayNumber = mainDisplayNumber.substring(0, mainDisplayNumber.length() - 1);
                     if (runningSum.endsWith("+") || runningSum.endsWith("*") || runningSum.endsWith("-") ){displayNumber("0");}
@@ -223,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
     public void clickEquals(View view){
         mainDisplayNumber = "";
         try {
-            if(runningSum.endsWith("+")){
+            if(runningSum.endsWith("+") || runningSum.endsWith("-") || runningSum.endsWith("*")){
                 runningSum = runningSum.substring(0, runningSum.length() - 1);
             }
             int quantity = (int) eval(runningSum);
